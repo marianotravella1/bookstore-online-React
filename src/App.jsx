@@ -1,4 +1,5 @@
-import BookList from "./components/bookItem/BookList";
+import BookItem from "./components/bookItem/BookItem";
+import BookList from "./components/bookItem/bookList/BookList";
 import { books } from "./data/books";
 const App = () => {
   return (
