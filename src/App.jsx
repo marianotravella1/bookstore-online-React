@@ -1,10 +1,11 @@
-import BookItem from "./components/bookItem/BookItem";
-import BookList from "./components/bookItem/bookList/BookList";
+import BookList from "./bookList/BookList";
 import { books } from "./data/books";
+import Header from "./header/Header";
 const App = () => {
   return (
     <>
-      <BookList books={books}/>
+      <Header />
+      <BookList books={books} />
     </>
   );
 };

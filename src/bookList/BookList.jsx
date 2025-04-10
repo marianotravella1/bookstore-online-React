@@ -1,5 +1,6 @@
 import React from "react";
-import BookItem from "../BookItem";
+import './bookList.css';
+import BookItem from "../components/bookItem/BookItem";
 
 const BookList = ({ books }) => {
   const booksMapped = books.map((book) => (
@@ -14,7 +15,7 @@ const BookList = ({ books }) => {
     />
   ));
 
-  return <div className="d-flex flex-wrap">{booksMapped}</div>;
+  return <div className="flex flex-wrap">{booksMapped}</div>;
 };
 
 export default BookList;

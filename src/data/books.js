@@ -21,7 +21,7 @@ export const books = [
   },
   {
     id: 3,
-    title: "Las dos torres",
+    title: "El señor de los anillos: Las dos torres",
     author: "J.R.R Tolkien",
     rating: 5,
     pageCount: 352,
