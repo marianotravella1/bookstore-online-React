@@ -15,7 +15,7 @@ const Header = () => {
         <div className="flex items-center bg-white rounded-md overflow-hidden shadow-sm">
           <input
             type="text"
-            placeholder="Buscar libros..."
+            placeholder="Search Books..."
             className="w-full px-4 py-2 text-sm focus:outline-none"
           />
           <button className="px-3">
