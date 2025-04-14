@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './bookList.css';
 import BookItem from "../components/bookItem/BookItem";
 
-const BookList = ({ books }) => {
+const BookList = () => {
+
+  const [books, setBooks] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/api/books")
+    .then((res) => {
+      if (!res.ok) throw new Error("Error fetching books");
+      return res.json();
+    })
+    .then((data) => setBooks(data))
+    .catch((err) => console.error(err));
+  }, []);
+
   const booksMapped = books.map((book) => (
     <BookItem
       key={book.id}
