@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from "react";
-import './bookList.css';
+import "./bookList.css";
 import BookItem from "../components/bookItem/BookItem";
+import BookSearch from "../components/bookSearch/BookSearch";
+import { useState } from "react";
 
-const BookList = () => {
+const BookList = ({ books }) => {
+  const [selectedBook, setSelectedBook] = useState("");
 
-  const [books, setBooks] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:8080/api/books")
-    .then((res) => {
-      if (!res.ok) throw new Error("Error fetching books");
-      return res.json();
-    })
-    .then((data) => setBooks(data))
-    .catch((err) => console.error(err));
-  }, []);
+  const handleSelectBook = (title) => {
+    setSelectedBook(title);
+  };
 
   const booksMapped = books.map((book) => (
     <BookItem
@@ -25,10 +19,21 @@ const BookList = () => {
       pageCount={book.pageCount}
       imageUrl={book.imageUrl}
       available={book.available}
+      onBookSelected={handleSelectBook}
     />
   ));
 
-  return <div className="flex flex-wrap">{booksMapped}</div>;
+  return (
+    <>
+      {selectedBook && (
+        <p>
+          Usted ha seleccionado el libro: <b>{selectedBook}</b>
+        </p>
+      )}
+      <BookSearch />
+      <div className="flex flex-wrap">{booksMapped}</div>;
+    </>
+  );
 };
 
 export default BookList;
