@@ -30,7 +30,6 @@ const BookList = ({ books }) => {
           Usted ha seleccionado el libro: <b>{selectedBook}</b>
         </p>
       )}
-      <BookSearch />
       <div className="flex flex-wrap">{booksMapped}</div>;
     </>
   );
