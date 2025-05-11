@@ -42,10 +42,9 @@ const NewBookForm = ({ onBookAdded }) => {
       imageUrl,
       available,
     };
+
     
-    onBookAdded(newBook);
-
-
+    
     try {
       const response = await fetch("http://localhost:8080/books", {
         method: "POST",
@@ -54,15 +53,16 @@ const NewBookForm = ({ onBookAdded }) => {
         },
         body: JSON.stringify(newBook),
       });
-
+      
       if (!response.ok) {
         throw new Error("Error creating the book");
       }
-
+      
       const createdBook = await response.json();
-
-      console.log("Libro creado: ", newBook);
-
+      
+      console.log("Libro creado: ", createdBook);
+      
+      onBookAdded(createdBook);
 
       setTitle("");
       setAuthor("");
