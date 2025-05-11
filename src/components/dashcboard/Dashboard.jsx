@@ -6,6 +6,10 @@ import NewBookForm from "../newBookForm/NewBookForm";
 const Dashboard = () => {
   const [books, setBooks] = useState([]);
 
+  const handleAddBook = (newBook) => {
+    setBooks(prevBooks => [newBook, ...prevBooks])
+  }
+
   useEffect(() => {
     fetch("http://localhost:8080/books")
       .then((res) => {
@@ -18,7 +22,7 @@ const Dashboard = () => {
   return (
     <>
       <Header />
-      <NewBookForm setBooks={setBooks}/>
+      <NewBookForm onBookAdded={handleAddBook}/>
       <BookList books={books}/>
     </>
   );

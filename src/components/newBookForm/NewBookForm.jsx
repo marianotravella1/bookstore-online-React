@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const NewBookForm = () => {
+const NewBookForm = ({ onBookAdded }) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [rating, setRating] = useState("");
@@ -42,9 +42,12 @@ const NewBookForm = () => {
       imageUrl,
       available,
     };
+    
+    onBookAdded(newBook);
+
 
     try {
-      const response = await fetch("http://localhost:8080/api/books", {
+      const response = await fetch("http://localhost:8080/books", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -59,6 +62,7 @@ const NewBookForm = () => {
       const createdBook = await response.json();
 
       console.log("Libro creado: ", newBook);
+
 
       setTitle("");
       setAuthor("");
