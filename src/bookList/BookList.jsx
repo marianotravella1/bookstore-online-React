@@ -1,27 +1,32 @@
 import "./bookList.css";
 import BookItem from "../components/bookItem/BookItem";
-import BookSearch from "../components/bookSearch/BookSearch";
 import { useState } from "react";
 
-const BookList = ({ books }) => {
+const BookList = ({ books, search }) => {
   const [selectedBook, setSelectedBook] = useState("");
 
   const handleSelectBook = (title) => {
     setSelectedBook(title);
   };
 
-  const booksMapped = books.map((book) => (
-    <BookItem
-      key={book.id}
-      title={book.title}
-      author={book.author}
-      rating={book.rating}
-      pageCount={book.pageCount}
-      imageUrl={book.imageUrl}
-      available={book.available}
-      onBookSelected={handleSelectBook}
-    />
-  ));
+
+  
+
+  const booksMapped = books
+    .filter((book) => book.title.toLowerCase().includes(search.toLowerCase()))
+    .map((book) => (
+      <BookItem
+        key={book.id}
+        title={book.title}
+        author={book.author}
+        rating={book.rating}
+        pageCount={book.pageCount}
+        imageUrl={book.imageUrl}
+        available={book.available}
+        onBookSelected={handleSelectBook}
+
+      />
+    ));
 
   return (
     <>

@@ -6,6 +6,9 @@ import NewBookForm from "../newBookForm/NewBookForm";
 const Dashboard = () => {
   const [books, setBooks] = useState([]);
 
+  const [search, setSearch] = useState("");
+
+
   const handleAddBook = (newBook) => {
     setBooks(prevBooks => [newBook, ...prevBooks])
   }
@@ -21,9 +24,9 @@ const Dashboard = () => {
   }, []);
   return (
     <>
-      <Header />
+      <Header search={search} setSearch={setSearch} />
       <NewBookForm onBookAdded={handleAddBook}/>
-      <BookList books={books}/>
+      <BookList books={books} search={search}/>
     </>
   );
 }
