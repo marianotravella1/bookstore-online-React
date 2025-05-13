@@ -13,45 +13,38 @@ const Login = ({ onLogin }) => {
 
   const navigate = useNavigate();
 
-  const handleEmailChange = (event) => {
+  const handleChangeEmail = (event) => {
     setEmail(event.target.value);
-    if (event.target.value.length > 0) {
-      setErrors({ ...errors, email: false });
-    }
-    if (event.target.value.length === 0) {
-      setErrors({ ...errors, email: true });
-    }
-    if (event.target.value.length > 0 && errors.email) {
-      emailRef.current.focus();
-    }
-
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      email: false,
+    }));
   }
-  const handlePasswordChange = (event) => {
+
+  const handleChangePassword = (event) => {
     setPassword(event.target.value);
-    if (event.target.value.length > 0) {
-      setErrors({ ...errors, password: false });
-    }
-    if (event.target.value.length === 0) {
-      setErrors({ ...errors, password: true });
-    }
-    if (event.target.value.length > 0 && errors.password) {
-      passwordRef.current.focus();
-    }
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      password: false,
+    }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!email || !password) {
-      setErrors({
-        email: email.length === 0,
-        password: password.length === 0,
-      });
-      if (email.length === 0) {
-        emailRef.current.focus();
-      }
-      if (password.length === 0) {
-        passwordRef.current.focus();
-      }
+    if (!email) {
+      emailRef.current.focus();
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        email: true,
+      }));
+      return;
+    }
+    if (!password) {
+      passwordRef.current.focus();
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        password: true,
+      }));
       return;
     }
 
@@ -68,7 +61,7 @@ const Login = ({ onLogin }) => {
           type="text"
           placeholder="Username"
           className="border border-gray-300 p-2 rounded w-64"
-          onChange={handleEmailChange}
+          onChange={handleChangeEmail}
           value={email}
           ref={emailRef}
         ></input>
@@ -76,7 +69,7 @@ const Login = ({ onLogin }) => {
           type="password"
           placeholder="Password"
           className="border border-gray-300 p-2 rounded w-64"
-          onChange={handlePasswordChange}
+          onChange={handleChangePassword}
           value={password}
           ref={passwordRef}
         ></input>
