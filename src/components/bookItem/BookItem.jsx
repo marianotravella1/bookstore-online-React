@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./bookItem.css";
+import { Star } from "lucide-react";
 
 const BookItem = ({
   title,
@@ -10,12 +11,24 @@ const BookItem = ({
   imageUrl,
   onBookSelected,
 }) => {
-
   const handleSelectBook = () => {
     onBookSelected(title);
-}
+  };
 
   const handleClick = () => {};
+
+  const filledStars = Array.from({ length: Math.floor(rating) }, (_, i) => (
+    <Star
+      key={i}
+      className="text-yellow-500"
+      size={20}
+      fill="yellow"
+      onClick={handleClick}
+    />
+  ));
+  const emptyStars = Array.from({ length: 5 - Math.floor(rating) }, (_, i) => (
+    <Star key={i} className="text-gray-300" size={16} onClick={handleClick} />
+  ));
 
   const availableBadge = available ? (
     <p className="text-sm text-green-700 bg-green-100 px-2 py-0.5 rounded w-fit">
@@ -44,9 +57,10 @@ const BookItem = ({
         <p className="text-sm text-gray-600">{author}</p>
 
         <div className="text-sm text-gray-700 space-y-1">
-          <p>
-            <strong>Rating: </strong> {rating}
-          </p>
+          <div className="flex items-center gap-0.5">
+            {filledStars}
+            {emptyStars}
+          </div>
           <p>
             <strong>📖</strong> {pageCount} pages
           </p>
